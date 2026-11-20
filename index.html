@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="en-IE">
+<html lang="en-IE" class="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="dark light">
-<title>The book club with an end date | [Niamh's Book Club]</title>
+<title>The book club with an end date | [Library name]</title>
 <meta name="description" content="Six Wednesday evenings, one librarian-chosen list, then you're free.">
 
 <!-- Open Graph -->
 <meta property="og:type" content="website">
-<meta property="og:title" content="The book club with an end date | [Niamh's Book Club]">
+<meta property="og:title" content="The book club with an end date | [Library name]">
 <meta property="og:description" content="Six Wednesday evenings, one librarian-chosen list, then you're free.">
 <!-- og:image placeholder (1200x630). Replace with an absolute URL once the image exists, then uncomment:
 <meta property="og:image" content="https://example.com/og-image-1200x630.png">
@@ -17,7 +17,7 @@
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="The book club with an end date | [Niamh's Book Club]">
+<meta name="twitter:title" content="The book club with an end date | [Library name]">
 <meta name="twitter:description" content="Six Wednesday evenings, one librarian-chosen list, then you're free.">
 <!-- twitter:image placeholder (1200x630). Same image as og:image, then uncomment:
 <meta name="twitter:image" content="https://example.com/og-image-1200x630.png">
@@ -29,67 +29,84 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-<!-- Apply the saved theme before first paint (dark is the default) -->
+<!-- Apply the saved theme before first paint. The blush-pink light theme is the default
+     (<html class="light">); only an explicit saved "dark" choice removes it. -->
 <script>
 (function () {
   try {
-    if (localStorage.getItem("theme") === "light") {
-      document.documentElement.classList.add("light");
+    if (localStorage.getItem("theme") === "dark") {
+      document.documentElement.classList.remove("light");
     }
-  } catch (e) { /* storage unavailable: stay on dark */ }
+  } catch (e) { /* storage unavailable: stay on the light default */ }
 })();
 </script>
 
 <style>
 /* ---------- Theme tokens ---------- */
+/* Dark mode = "midnight plum" (the toggle's alternate). Variable names are the original
+   theme's; in this romantasy palette --amber is rose, --cyan is violet, --green is mint/emerald,
+   --neon is the link colour.
+   Original navy theme, to restore:
+   --bg:#020a18; --bg-grad:linear-gradient(170deg,#020a18,#041028 40%,#06142e 70%,#020a18);
+   --surface:rgba(8,24,56,0.85); --border:rgba(0,170,255,0.12); --text:#d0e0f0; --text-bright:#e8f0ff;
+   --text-dim:#6888aa; --neon:#00aaff; --cyan:#00e5ff; --green:#00ff88; --amber:#ffaa00; */
 :root {
-  --bg: #020a18;
-  --bg-grad: linear-gradient(170deg, #020a18, #041028 40%, #06142e 70%, #020a18);
-  --surface: rgba(8,24,56,0.85);
-  --border: rgba(0,170,255,0.12);
-  --text: #d0e0f0;
-  --text-bright: #e8f0ff;
-  --text-dim: #6888aa;
-  --neon: #00aaff;
-  --cyan: #00e5ff;
-  --green: #00ff88;
-  --amber: #ffaa00;
+  --bg: #1a0b1f;
+  --bg-grad:
+    radial-gradient(900px 520px at 12% -8%, rgba(255,110,180,0.22), transparent 62%),
+    radial-gradient(800px 520px at 92% 18%, rgba(150,100,255,0.22), transparent 60%),
+    linear-gradient(170deg, #1a0b1f, #26102c 40%, #2b1233 70%, #1a0b1f);
+  --surface: rgba(46,20,54,0.82);
+  --border: rgba(255,150,210,0.16);
+  --text: #f0dcec;
+  --text-bright: #fff0f8;
+  --text-dim: #b98cab;
+  --neon: #ff8cc4;
+  --cyan: #c9a2ff;
+  --green: #7ff0c4;
+  --amber: #ff7eb6;
 
-  --on-accent: #020a18;
-  --header-bg: rgba(2,10,24,0.62);
-  --grid: rgba(0,170,255,0.035);
-  --orb1: rgba(0,170,255,0.30);
-  --orb2: rgba(255,170,0,0.18);
-  --opt-bg: rgba(255,255,255,0.03);
-  --shadow: 0 18px 50px rgba(0,0,0,0.35);
-  --focus: #00e5ff;
+  --on-accent: #1a0b1f;
+  --header-bg: rgba(26,11,31,0.66);
+  --grid: rgba(255,150,210,0.04);
+  --orb1: rgba(255,100,175,0.30);
+  --orb2: rgba(150,100,255,0.26);
+  --star: rgba(255,225,160,0.7);
+  --opt-bg: rgba(255,255,255,0.05);
+  --shadow: 0 18px 50px rgba(0,0,0,0.4);
+  --focus: #c9a2ff;
 
   --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --font-serif: Georgia, "Iowan Old Style", "Palatino Linotype", Palatino, "Times New Roman", serif;
   color-scheme: dark;
 }
 
+/* Default theme: blush-pink romantasy. Rose, violet and emerald accents, gold stardust. */
 html.light {
-  --bg: #f8f3e8;
-  --bg-grad: linear-gradient(170deg, #f9f4ea, #f2ebdc 40%, #ede4d1 70%, #f9f4ea);
-  --surface: rgba(255,252,245,0.9);
-  --border: rgba(50,60,90,0.16);
-  --text: #2b3548;
-  --text-bright: #0d1729;
-  --text-dim: #59677f;
-  --neon: #0b62bd;
-  --cyan: #00778c;
-  --green: #067544;
-  --amber: #a35c00;
+  --bg: #fff1f6;
+  --bg-grad:
+    radial-gradient(900px 520px at 12% -8%, rgba(255,170,208,0.55), transparent 62%),
+    radial-gradient(800px 520px at 92% 18%, rgba(201,162,255,0.38), transparent 60%),
+    linear-gradient(170deg, #fff6fa, #ffe8f1 45%, #f7e3f5 75%, #fff4f8);
+  --surface: rgba(255,250,252,0.80);
+  --border: rgba(176,48,110,0.20);
+  --text: #4a2540;
+  --text-bright: #2a0f26;
+  --text-dim: #85557a;
+  --neon: #a3246a;
+  --cyan: #7a3bc4;
+  --green: #1b7a5a;
+  --amber: #c8245f;
 
   --on-accent: #ffffff;
-  --header-bg: rgba(249,244,234,0.74);
-  --grid: rgba(13,23,41,0.04);
-  --orb1: rgba(11,98,189,0.16);
-  --orb2: rgba(163,92,0,0.16);
-  --opt-bg: rgba(255,255,255,0.7);
-  --shadow: 0 18px 50px rgba(60,50,30,0.12);
-  --focus: #0b62bd;
+  --header-bg: rgba(255,243,248,0.74);
+  --grid: rgba(176,48,110,0.04);
+  --orb1: rgba(255,120,185,0.34);
+  --orb2: rgba(160,110,255,0.26);
+  --star: rgba(201,138,30,0.8);
+  --opt-bg: rgba(255,255,255,0.72);
+  --shadow: 0 18px 50px rgba(176,48,110,0.15);
+  --focus: #5b21b6;
   color-scheme: light;
 }
 
@@ -147,6 +164,18 @@ main { position: relative; z-index: 1; }
     linear-gradient(90deg, var(--grid) 1px, transparent 1px);
   background-size: 60px 60px;
 }
+/* Stardust: tiny scattered sparkles that slowly twinkle */
+.bg-stars {
+  position: absolute; inset: 0; opacity: 0.55;
+  background-image:
+    radial-gradient(circle, var(--star) 0 1.3px, transparent 2.2px),
+    radial-gradient(circle, var(--star) 0 1px, transparent 2px),
+    radial-gradient(circle, var(--star) 0 1.6px, transparent 2.6px);
+  background-size: 173px 173px, 241px 241px, 337px 337px;
+  background-position: 21px 37px, 113px 151px, 59px 97px;
+  animation: twinkle 7s ease-in-out infinite alternate;
+}
+@keyframes twinkle { from { opacity: 0.25; } to { opacity: 0.75; } }
 .bg-orbs {
   position: absolute; inset: 0;
   /* fully hidden inside the 880px column, feathered in over the 140px outside it */
@@ -243,7 +272,7 @@ html.light .theme-btn .i-moon { display: block; }
 .rail.labelled .endbar { margin-top: -2px; }
 
 @media (prefers-reduced-motion: reduce) {
-  .orb { animation: none; }
+  .orb, .bg-stars { animation: none; }
   .rail.seq .lamp, .rail.seq.in .lamp {
     animation: none; background: var(--lamp); border-color: var(--lamp); box-shadow: 0 0 14px var(--lamp);
   }
@@ -256,6 +285,7 @@ html.light .theme-btn .i-moon { display: block; }
 .hero .meta { margin: 18px 0 30px; font-size: 0.92rem; color: var(--text-dim); }
 .hero .meta span { color: var(--text-bright); font-weight: 600; }
 .hero-rail { margin-top: 8px; }
+.hero h1 em { font-style: italic; color: var(--amber); }
 
 /* ---------- Cards and grids ---------- */
 .card {
@@ -312,6 +342,7 @@ details.faq p { padding-bottom: 18px; margin: 0; }
 
 /* ---------- Qualifier ---------- */
 .eyebrow { text-transform: uppercase; letter-spacing: 0.14em; font-size: 0.78rem; color: var(--amber); font-weight: 600; margin: 0 0 8px; }
+.eyebrow::before { content: "\2726"; content: "\2726" / ""; margin-right: 0.55em; }
 .quiz-sec .lead { max-width: 560px; color: var(--text); }
 .quiz { padding: 26px 24px; }
 .quiz-top { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 22px; flex-wrap: wrap; }
@@ -377,6 +408,7 @@ fieldset.q legend:focus { outline: none; }
 <body>
 <div class="bg" aria-hidden="true">
   <div class="bg-grid"></div>
+  <div class="bg-stars"></div>
   <div class="bg-orbs"><span class="orb o1"></span><span class="orb o2"></span></div>
 </div>
 
@@ -403,7 +435,7 @@ fieldset.q legend:focus { outline: none; }
 
   <!-- 1. Hero -->
   <section class="hero wrap" aria-labelledby="hero-h">
-    <h1 id="hero-h">The book club with an end date.</h1>
+    <h1 id="hero-h">The book club with an <em>end date</em>.</h1>
     <p class="sub">Six Wednesday evenings at <span data-token="LIBRARY">[Library name]</span>. A reading list chosen by a librarian. A drink in the foyer afterwards. Then you're free.</p>
     <p><a class="btn btn-primary" href="#find">Find your cohort</a></p>
     <p class="meta"><span data-token="PRICE_TEXT">€[price]</span> per six-week cohort · in person · starts <span data-token="START_DATE">[start date]</span></p>
@@ -617,11 +649,11 @@ fieldset.q legend:focus { outline: none; }
   /* ===== Edit these five values; everything on the page reads from here. =====
      (The static <title> and og:/twitter: tags in <head> still need editing by hand.) */
   var CONFIG = {
-    LIBRARY: "[Library name]",
-    PRICE_TEXT: "€[price]",
-    START_DATE: "[start date]",
-    BOOKING_URL: "#",
-    CONTACT_URL: "#"
+    LIBRARY: "Niamh's Nook",
+    PRICE_TEXT: "€15",
+    START_DATE: "20/11/2026",
+    BOOKING_URL: "###",
+    CONTACT_URL: "###"
   };
 
   var root = document.documentElement;
