@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en-IE">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<title>The book club with an end date | [Library name]</title>
+<meta name="description" content="Six Wednesday evenings, one librarian-chosen list, then you're free.">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="The book club with an end date | [Library name]">
+<meta property="og:description" content="Six Wednesday evenings, one librarian-chosen list, then you're free.">
+<!-- og:image placeholder (1200x630). Replace with an absolute URL once the image exists, then uncomment:
+<meta property="og:image" content="https://example.com/og-image-1200x630.png">
+-->
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The book club with an end date | [Library name]">
+<meta name="twitter:description" content="Six Wednesday evenings, one librarian-chosen list, then you're free.">
+<!-- twitter:image placeholder (1200x630). Same image as og:image, then uncomment:
+<meta name="twitter:image" content="https://example.com/og-image-1200x630.png">
+-->
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%27.9em%27 font-size=%2790%27%3E📚%3C/text%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Apply the saved theme before first paint (dark is the default) -->
+<script>
+(function () {
+  try {
+    if (localStorage.getItem("theme") === "light") {
+      document.documentElement.classList.add("light");
+    }
+  } catch (e) { /* storage unavailable: stay on dark */ }
+})();
+</script>
+
+<style>
+/* ---------- Theme tokens ---------- */
+:root {
+  --bg: #020a18;
+  --bg-grad: linear-gradient(170deg, #020a18, #041028 40%, #06142e 70%, #020a18);
+  --surface: rgba(8,24,56,0.85);
+  --border: rgba(0,170,255,0.12);
+  --text: #d0e0f0;
+  --text-bright: #e8f0ff;
+  --text-dim: #6888aa;
+  --neon: #00aaff;
+  --cyan: #00e5ff;
+  --green: #00ff88;
+  --amber: #ffaa00;
+
+  --on-accent: #020a18;
+  --header-bg: rgba(2,10,24,0.62);
+  --grid: rgba(0,170,255,0.035);
+  --orb1: rgba(0,170,255,0.30);
+  --orb2: rgba(255,170,0,0.18);
+  --opt-bg: rgba(255,255,255,0.03);
+  --shadow: 0 18px 50px rgba(0,0,0,0.35);
+  --focus: #00e5ff;
+
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-serif: Georgia, "Iowan Old Style", "Palatino Linotype", Palatino, "Times New Roman", serif;
+  color-scheme: dark;
+}
+
+html.light {
+  --bg: #f8f3e8;
+  --bg-grad: linear-gradient(170deg, #f9f4ea, #f2ebdc 40%, #ede4d1 70%, #f9f4ea);
+  --surface: rgba(255,252,245,0.9);
+  --border: rgba(50,60,90,0.16);
+  --text: #2b3548;
+  --text-bright: #0d1729;
+  --text-dim: #59677f;
+  --neon: #0b62bd;
+  --cyan: #00778c;
+  --green: #067544;
+  --amber: #a35c00;
+
+  --on-accent: #ffffff;
+  --header-bg: rgba(249,244,234,0.74);
+  --grid: rgba(13,23,41,0.04);
+  --orb1: rgba(11,98,189,0.16);
+  --orb2: rgba(163,92,0,0.16);
+  --opt-bg: rgba(255,255,255,0.7);
+  --shadow: 0 18px 50px rgba(60,50,30,0.12);
+  --focus: #0b62bd;
+  color-scheme: light;
+}
+
+/* ---------- Base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--text);
+  background-color: var(--bg);
+  background-image: var(--bg-grad);
+  background-attachment: fixed;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+a { color: var(--neon); text-underline-offset: 3px; }
+a:hover { color: var(--cyan); }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; border-radius: 4px; }
+
+h1, h2, h3 {
+  font-family: var(--font-serif);
+  color: var(--text-bright);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  margin: 0 0 0.5em;
+}
+h1 { font-size: clamp(2.5rem, 7vw, 3.6rem); font-weight: 700; letter-spacing: -0.02em; }
+h2 { font-size: clamp(1.7rem, 4.2vw, 2.3rem); font-weight: 700; }
+h3 { font-size: 1.3rem; font-weight: 700; }
+p { margin: 0 0 1em; }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+
+.wrap { max-width: 880px; margin: 0 auto; padding: 0 20px; }
+section[id] { scroll-margin-top: 76px; }
+main { position: relative; z-index: 1; }
+
+/* ---------- Background: grid + orbs (orbs only outside the 880px column) ---------- */
+.bg { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+.bg-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+.bg-orbs {
+  position: absolute; inset: 0;
+  /* fully hidden inside the 880px column, feathered in over the 140px outside it */
+  -webkit-mask-image: linear-gradient(90deg, #000 0, #000 calc(50% - 580px), transparent calc(50% - 440px), transparent calc(50% + 440px), #000 calc(50% + 580px), #000 100%);
+          mask-image: linear-gradient(90deg, #000 0, #000 calc(50% - 580px), transparent calc(50% - 440px), transparent calc(50% + 440px), #000 calc(50% + 580px), #000 100%);
+}
+.orb { position: absolute; width: 560px; height: 560px; border-radius: 50%; filter: blur(60px); }
+.orb.o1 {
+  top: 6%; left: calc(50% - 440px - 420px);
+  background: radial-gradient(circle, var(--orb1), transparent 68%);
+  animation: orbit1 46s linear infinite;
+}
+.orb.o2 {
+  top: 48%; left: calc(50% + 440px - 140px);
+  background: radial-gradient(circle, var(--orb2), transparent 68%);
+  animation: orbit1 58s linear infinite reverse;
+}
+@keyframes orbit1 {
+  from { transform: rotate(0deg) translateX(70px) rotate(0deg); }
+  to   { transform: rotate(360deg) translateX(70px) rotate(-360deg); }
+}
+
+/* ---------- Header ---------- */
+.site-header {
+  position: sticky; top: 0; z-index: 50;
+  background: var(--header-bg);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+          backdrop-filter: blur(20px) saturate(140%);
+  border-bottom: 1px solid var(--border);
+}
+.header-in {
+  max-width: 880px; margin: 0 auto; padding: 10px 20px;
+  display: flex; align-items: center; gap: 18px;
+}
+.brand {
+  margin-right: auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  font-family: var(--font-serif); font-weight: 700; font-size: 1.05rem;
+  color: var(--text-bright); text-decoration: none;
+}
+.brand:hover { color: var(--amber); }
+.site-nav { display: flex; gap: 18px; font-size: 0.9rem; }
+.site-nav a {
+  color: var(--text); text-decoration: none; padding: 6px 2px;
+  border-bottom: 2px solid transparent;
+}
+.site-nav a:hover { color: var(--text-bright); border-bottom-color: var(--amber); }
+.theme-btn {
+  width: 40px; height: 40px; flex: none; display: grid; place-items: center;
+  border-radius: 50%; border: 1px solid var(--border); background: var(--opt-bg);
+  color: var(--text-bright); cursor: pointer;
+}
+.theme-btn:hover { border-color: var(--cyan); }
+.theme-btn svg { width: 20px; height: 20px; }
+.theme-btn .i-moon { display: none; }
+html.light .theme-btn .i-sun { display: none; }
+html.light .theme-btn .i-moon { display: block; }
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-block; font: inherit; font-weight: 600; text-align: center; text-decoration: none;
+  padding: 13px 26px; border-radius: 28px; line-height: 1.3; border: 1px solid transparent; cursor: pointer;
+  transition: transform .15s ease, filter .15s ease, border-color .15s ease;
+}
+.btn-primary { background: var(--accent, var(--amber)); color: var(--on-accent); }
+.btn-primary:hover { color: var(--on-accent); filter: brightness(1.08); transform: translateY(-1px); }
+.btn-ghost { background: transparent; color: var(--text-bright); border-color: var(--border); }
+.btn-ghost:hover { color: var(--text-bright); border-color: var(--cyan); }
+.btn:disabled { opacity: 0.45; cursor: not-allowed; transform: none; filter: none; }
+
+/* ---------- Six-Lamp Rail ---------- */
+.rail { list-style: none; margin: 0; padding: 0; display: flex; align-items: flex-start; gap: clamp(10px, 3.2vw, 34px); --lamp: var(--amber); }
+.lamp-item { display: flex; flex-direction: column; align-items: center; gap: 8px; min-width: 0; }
+.lamp {
+  width: 14px; height: 14px; border-radius: 50%;
+  border: 2px solid var(--text-dim); background: transparent;
+  transition: background-color .35s ease, border-color .35s ease, box-shadow .35s ease;
+}
+.lamp.on {
+  background: var(--lamp); border-color: var(--lamp);
+  box-shadow: 0 0 14px var(--lamp);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--lamp) 18%, transparent), 0 0 16px 2px color-mix(in srgb, var(--lamp) 55%, transparent);
+}
+.endbar { align-self: flex-start; width: 3px; height: 18px; margin-top: -2px; border-radius: 2px; background: var(--text-dim); flex: none; }
+.lamp-label { font-size: 0.74rem; line-height: 1.3; color: var(--text-dim); text-align: center; }
+.lamp-label .last { display: block; color: var(--text-bright); font-weight: 600; }
+
+.rail.seq.in .lamp { animation: lampOn .6s ease forwards; animation-delay: calc(var(--i) * 150ms); }
+@keyframes lampOn {
+  from { background-color: transparent; border-color: var(--text-dim); box-shadow: none; }
+  to   { background-color: var(--lamp); border-color: var(--lamp); box-shadow: 0 0 14px var(--lamp); }
+}
+.rail.labelled { width: 100%; justify-content: space-between; gap: 6px; }
+.rail.labelled .lamp-item { flex: 1 1 0; }
+.rail.labelled .endbar { margin-top: -2px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .orb { animation: none; }
+  .rail.seq .lamp, .rail.seq.in .lamp {
+    animation: none; background: var(--lamp); border-color: var(--lamp); box-shadow: 0 0 14px var(--lamp);
+  }
+  .btn, .lamp { transition: none; }
+}
+
+/* ---------- Hero ---------- */
+.hero { padding-top: clamp(56px, 11vw, 104px); padding-bottom: 28px; }
+.hero .sub { font-size: clamp(1.05rem, 2.4vw, 1.25rem); max-width: 640px; color: var(--text); margin-bottom: 1.5em; }
+.hero .meta { margin: 18px 0 30px; font-size: 0.92rem; color: var(--text-dim); }
+.hero .meta span { color: var(--text-bright); font-weight: 600; }
+.hero-rail { margin-top: 8px; }
+
+/* ---------- Cards and grids ---------- */
+.card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 16px;
+  padding: 22px 22px; box-shadow: var(--shadow);
+  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+}
+.section { padding-top: 56px; }
+.grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.reasons .card p { margin: 0; }
+.reasons .card h3 { color: var(--amber); }
+
+/* ---------- Sample experience ---------- */
+.sample .rail { margin: 8px 0 28px; }
+.beats { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; counter-reset: beat; }
+.beats li { counter-increment: beat; }
+.beats li::before {
+  content: counter(beat); display: inline-grid; place-items: center; width: 28px; height: 28px; margin-bottom: 10px;
+  border-radius: 50%; border: 1px solid var(--amber); color: var(--amber); font-weight: 600; font-size: 0.85rem;
+}
+.beats h3 { margin-bottom: 0.3em; }
+.beats p { margin: 0; }
+
+/* ---------- Social proof ---------- */
+.proof .intro { max-width: 640px; color: var(--text-dim); }
+.pair { display: grid; grid-template-columns: 1.5fr 1fr; gap: 18px; align-items: stretch; margin-bottom: 14px; }
+.pair .card { margin: 0; }
+blockquote { margin: 0; }
+blockquote p { font-family: var(--font-serif); font-size: 1.15rem; line-height: 1.45; color: var(--text-bright); margin: 0 0 0.6em; }
+blockquote footer { font-size: 0.82rem; color: var(--text-dim); }
+.answer .lbl, .lbl { display: block; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-dim); margin-bottom: 6px; }
+.answer { display: flex; flex-direction: column; justify-content: center; border-color: color-mix(in srgb, var(--amber) 45%, transparent); }
+.answer p { margin: 0; font-family: var(--font-serif); font-size: 1.2rem; font-weight: 700; color: var(--amber); }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 18px 0; }
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.stat .num { display: block; font-family: var(--font-serif); font-size: 2.4rem; font-weight: 700; line-height: 1.1; color: var(--green); margin-bottom: 6px; }
+.stat p { margin: 0 0 6px; font-size: 0.95rem; }
+.stat small { color: var(--text-dim); font-size: 0.8rem; display: block; }
+
+/* ---------- FAQ ---------- */
+.faq-list { display: grid; gap: 10px; }
+details.faq { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 0 20px; }
+details.faq summary {
+  list-style: none; cursor: pointer; padding: 16px 28px 16px 0; position: relative;
+  font-weight: 600; color: var(--text-bright);
+}
+details.faq summary::-webkit-details-marker { display: none; }
+details.faq summary::after {
+  content: "+"; position: absolute; right: 2px; top: 50%; transform: translateY(-52%);
+  font-size: 1.5rem; color: var(--amber); font-weight: 400;
+}
+details.faq[open] summary::after { content: "\2212"; }
+details.faq p { padding-bottom: 18px; margin: 0; }
+
+/* ---------- Qualifier ---------- */
+.eyebrow { text-transform: uppercase; letter-spacing: 0.14em; font-size: 0.78rem; color: var(--amber); font-weight: 600; margin: 0 0 8px; }
+.quiz-sec .lead { max-width: 560px; color: var(--text); }
+.quiz { padding: 26px 24px; }
+.quiz-top { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 22px; flex-wrap: wrap; }
+.step { margin: 0; font-size: 0.85rem; color: var(--text-dim); }
+fieldset.q { border: 0; margin: 0; padding: 0; min-width: 0; }
+fieldset.q legend { font-family: var(--font-serif); font-size: clamp(1.3rem, 3.4vw, 1.65rem); font-weight: 700; color: var(--text-bright); line-height: 1.25; margin-bottom: 16px; padding: 0; }
+fieldset.q legend:focus { outline: none; }
+.opts { display: grid; gap: 10px; }
+.opt {
+  display: flex; gap: 12px; align-items: flex-start; padding: 14px 16px; cursor: pointer;
+  border: 1px solid var(--border); border-radius: 12px; background: var(--opt-bg);
+  transition: border-color .15s ease, background-color .15s ease;
+}
+.opt:hover { border-color: var(--cyan); }
+.opt input { flex: none; width: 18px; height: 18px; margin: 4px 0 0; accent-color: var(--amber); }
+.opt.sel { border-color: var(--amber); box-shadow: inset 0 0 0 1px var(--amber); }
+.opt-text { color: var(--text-bright); }
+.actions { display: flex; gap: 12px; justify-content: flex-end; margin-top: 22px; }
+.actions [hidden] { display: none; }
+
+.result-wrap { margin-top: 4px; }
+.result { border-left: 4px solid var(--accent); padding-left: 20px; }
+.result .rail { --lamp: var(--accent); margin-bottom: 18px; }
+.result .eyebrow { color: var(--accent); }
+.result h3 { font-size: clamp(1.9rem, 5vw, 2.5rem); margin-bottom: 0.1em; }
+.result h3:focus { outline: none; }
+.result .genres { color: var(--text-dim); margin-bottom: 14px; font-size: 1.02rem; }
+.result .promise { font-family: var(--font-serif); font-size: 1.3rem; line-height: 1.35; color: var(--text-bright); font-weight: 700; }
+.result .obj { font-style: italic; color: var(--text-bright); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 14px 0; margin: 18px 0; }
+.result .get { font-weight: 600; color: var(--text-bright); margin-bottom: 14px; }
+.result .why { font-size: 0.92rem; color: var(--text); }
+.result .why strong { color: var(--accent); font-weight: 600; }
+.result .ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 22px; align-items: center; }
+.result .ctas .btn-primary { background: var(--accent); }
+.restart { margin-top: 18px; }
+
+/* ---------- Footer ---------- */
+.site-footer { position: relative; z-index: 1; margin-top: 72px; border-top: 1px solid var(--border); padding: 30px 0 48px; font-size: 0.9rem; color: var(--text-dim); }
+.site-footer p { margin: 0 0 10px; }
+.site-footer .line { color: var(--text); }
+.site-footer ul { list-style: none; margin: 8px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 0.82rem; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 760px) {
+  .grid3, .beats, .two, .stats, .pair { grid-template-columns: 1fr; }
+  .site-nav a:first-child { display: none; }
+  .site-nav a { white-space: nowrap; }
+  .quiz { padding: 20px 16px; }
+  .actions .btn { flex: 1; }
+}
+@media (max-width: 520px) {
+  .site-nav { display: none; }
+  .result .ctas .btn { flex: 1 1 100%; }
+}
+</style>
+<noscript>
+<style>
+  .rail.seq .lamp { background: var(--lamp); border-color: var(--lamp); box-shadow: 0 0 14px var(--lamp); }
+</style>
+</noscript>
+</head>
+
+<body>
+<div class="bg" aria-hidden="true">
+  <div class="bg-grid"></div>
+  <div class="bg-orbs"><span class="orb o1"></span><span class="orb o2"></span></div>
+</div>
+
+<header class="site-header">
+  <div class="header-in">
+    <a class="brand" href="#top"><span data-token="LIBRARY">[Library name]</span> Book Club</a>
+    <nav class="site-nav" aria-label="Page sections">
+      <a href="#sample">How it works</a>
+      <a href="#find">Find your cohort</a>
+    </nav>
+    <button type="button" class="theme-btn" id="theme-toggle" aria-label="Switch to light mode">
+      <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="4"></circle>
+        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path>
+      </svg>
+      <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- 1. Hero -->
+  <section class="hero wrap" aria-labelledby="hero-h">
+    <h1 id="hero-h">The book club with an end date.</h1>
+    <p class="sub">Six Wednesday evenings at <span data-token="LIBRARY">[Library name]</span>. A reading list chosen by a librarian. A drink in the foyer afterwards. Then you're free.</p>
+    <p><a class="btn btn-primary" href="#find">Find your cohort</a></p>
+    <p class="meta"><span data-token="PRICE_TEXT">€[price]</span> per six-week cohort · in person · starts <span data-token="START_DATE">[start date]</span></p>
+    <ol class="rail seq hero-rail" aria-hidden="true">
+      <li class="lamp-item" style="--i:0"><span class="lamp"></span></li>
+      <li class="lamp-item" style="--i:1"><span class="lamp"></span></li>
+      <li class="lamp-item" style="--i:2"><span class="lamp"></span></li>
+      <li class="lamp-item" style="--i:3"><span class="lamp"></span></li>
+      <li class="lamp-item" style="--i:4"><span class="lamp"></span></li>
+      <li class="lamp-item" style="--i:5"><span class="lamp"></span></li>
+      <li class="endbar"></li>
+    </ol>
+  </section>
+
+  <!-- 2. Three reasons -->
+  <section class="wrap section reasons" aria-labelledby="reasons-h">
+    <h2 id="reasons-h" class="sr-only">Three reasons this is for you</h2>
+    <div class="grid3">
+      <article class="card">
+        <h3>It ends.</h3>
+        <p>Six Wednesdays, then you're free, with no standing commitment unless you choose another cohort.</p>
+      </article>
+      <article class="card">
+        <h3>Someone else chooses.</h3>
+        <p>A librarian sets the reading list, so you're never asked to nominate or stuck with picks you'd never choose.</p>
+      </article>
+      <article class="card">
+        <h3>Everyone starts together.</h3>
+        <p>Each cohort begins on Week 1 as a new group, so there's no existing clique to break into.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- 3. Sample experience -->
+  <section id="sample" class="wrap section sample" aria-labelledby="sample-h">
+    <h2 id="sample-h">What a Wednesday looks like</h2>
+    <ol class="rail seq labelled" aria-label="Six weeks, one Wednesday each">
+      <li class="lamp-item" style="--i:0"><span class="lamp"></span><span class="lamp-label">Week 1</span></li>
+      <li class="lamp-item" style="--i:1"><span class="lamp"></span><span class="lamp-label">Week 2</span></li>
+      <li class="lamp-item" style="--i:2"><span class="lamp"></span><span class="lamp-label">Week 3</span></li>
+      <li class="lamp-item" style="--i:3"><span class="lamp"></span><span class="lamp-label">Week 4</span></li>
+      <li class="lamp-item" style="--i:4"><span class="lamp"></span><span class="lamp-label">Week 5</span></li>
+      <li class="lamp-item" style="--i:5"><span class="lamp"></span><span class="lamp-label">Week 6<span class="last">Last night</span></span></li>
+      <li class="endbar" aria-hidden="true"></li>
+    </ol>
+    <ol class="beats">
+      <li class="card">
+        <h3>Arrive.</h3>
+        <p>Come on a Wednesday evening to <span data-token="LIBRARY">[Library name]</span>. You don't need to know anyone. Week 1 is everyone's first night.</p>
+      </li>
+      <li class="card">
+        <h3>Talk.</h3>
+        <p>Your cohort talks through that week's reading from the list your librarian chose.</p>
+      </li>
+      <li class="card">
+        <h3>Linger.</h3>
+        <p>Afterwards, a drink in the foyer.</p>
+      </li>
+      <li class="card">
+        <h3>Finish.</h3>
+        <p>After Week 6 it ends. If you'd like another cohort, you choose it.</p>
+      </li>
+    </ol>
+  </section>
+
+  <!-- 4. Social proof -->
+  <section id="proof" class="wrap section proof" aria-labelledby="proof-h">
+    <h2 id="proof-h">What readers say about book clubs</h2>
+    <p class="intro">These are readers talking about book clubs in general, not about this one. We started with their words.</p>
+
+    <div class="pair">
+      <blockquote class="card">
+        <p>“I left because they kept choosing books I had zero interest in.”</p>
+        <footer>Mumsnet poster ArtTheClownIsNotAMime, 25 Nov 2025 · <a href="https://www.mumsnet.com/talk/what_were_reading/5449834-book-club-are-you-in-one-if-so-what-does-it-cost-if-anything-and-what-do-you-likedislike-about-it" target="_blank" rel="noopener noreferrer">source</a></footer>
+      </blockquote>
+      <div class="card answer"><span class="lbl">What we did</span><p>A librarian chooses the list.</p></div>
+    </div>
+
+    <div class="pair">
+      <blockquote class="card">
+        <p>“Being in a sort of friendship-based book club means you can never ever leave.”</p>
+        <footer>Mumsnet poster Limth, 25 Nov 2025 · <a href="https://www.mumsnet.com/talk/what_were_reading/5449834-book-club-are-you-in-one-if-so-what-does-it-cost-if-anything-and-what-do-you-likedislike-about-it" target="_blank" rel="noopener noreferrer">source</a></footer>
+      </blockquote>
+      <div class="card answer"><span class="lbl">What we did</span><p>Six Wednesdays. Then it ends.</p></div>
+    </div>
+
+    <div class="pair">
+      <blockquote class="card">
+        <p>“…they are so cliquey, but they're not nasty.”</p>
+        <footer>Mumsnet poster ColdGirlWinter, 6 Jun 2024 · <a href="https://www.mumsnet.com/talk/relationships/5090613-billy-no-mates-at-the-book-group-wwyd?page=10" target="_blank" rel="noopener noreferrer">source</a></footer>
+      </blockquote>
+      <div class="card answer"><span class="lbl">What we did</span><p>Everyone starts on Week 1.</p></div>
+    </div>
+
+    <div class="two">
+      <blockquote class="card">
+        <span class="lbl">What works</span>
+        <p>“always finish because its for the book club”</p>
+        <footer>Mumsnet poster HeadNorth, 25 Nov 2025 · <a href="https://www.mumsnet.com/talk/what_were_reading/5449834-book-club-are-you-in-one-if-so-what-does-it-cost-if-anything-and-what-do-you-likedislike-about-it" target="_blank" rel="noopener noreferrer">source</a></footer>
+      </blockquote>
+      <blockquote class="card">
+        <span class="lbl">Expert</span>
+        <p>“We're living in a world full of noise – constant pings, feeds, and to-do lists.”</p>
+        <footer>Karen Napier, CEO, The Reading Agency, 23 Apr 2025 · <a href="https://worldbooknight.org/news/nation-of-interrupted-readers" target="_blank" rel="noopener noreferrer">source</a></footer>
+      </blockquote>
+    </div>
+
+    <div class="stats">
+      <div class="card stat">
+        <span class="num">46%</span>
+        <p>of UK adults say distractions make it hard to focus on reading.</p>
+        <small>The Reading Agency, 2025 · <a href="https://worldbooknight.org/news/nation-of-interrupted-readers" target="_blank" rel="noopener noreferrer">source</a></small>
+      </div>
+      <div class="card stat">
+        <span class="num">Half</span>
+        <p>of Irish adults surveyed say lack of time stops them reading more.</p>
+        <small>Red C for LGMA, reported by RTÉ, Feb 2026 · <a href="https://www.rte.ie/culture/2026/0225/1559546-why-you-should-pick-up-a-book-for-ireland-reads-day" target="_blank" rel="noopener noreferrer">source</a></small>
+      </div>
+      <div class="card stat">
+        <span class="num">17%</span>
+        <p>of UK lapsed readers said guidance on choosing books would help.</p>
+        <small>Reading Agency survey, reported by The Guardian, July 2024 · <a href="https://uk.style.yahoo.com/more-third-uk-adults-given-141113221.html" target="_blank" rel="noopener noreferrer">source</a></small>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. FAQ -->
+  <section id="faq" class="wrap section" aria-labelledby="faq-h">
+    <h2 id="faq-h">FAQ</h2>
+    <div class="faq-list">
+      <details class="faq">
+        <summary>Why pay when some library and bookshop clubs are free?</summary>
+        <p>Some are, and some are good. This is a different thing: six fixed Wednesdays, a reading list chosen for you by a librarian, and a drink in the foyer afterwards. It costs <span data-token="PRICE_TEXT">€[price]</span> for the six weeks.</p>
+      </details>
+      <details class="faq">
+        <summary>I don't know anyone. Will I be the odd one out?</summary>
+        <p>Every cohort starts together on Week 1, so there's no existing group to break into.</p>
+      </details>
+      <details class="faq">
+        <summary>What am I signing up for?</summary>
+        <p>Six Wednesday evenings. After Week 6 it ends. If you'd like another cohort, you choose to join one.</p>
+      </details>
+      <details class="faq">
+        <summary>I haven't got much time to read.</summary>
+        <p>You're in good company: half of Irish adults surveyed say lack of time stops them reading more (<a href="https://www.rte.ie/culture/2026/0225/1559546-why-you-should-pick-up-a-book-for-ireland-reads-day" target="_blank" rel="noopener noreferrer">RTÉ</a>, Feb 2026). A fixed Wednesday gives your reading a place in the week.</p>
+      </details>
+      <details class="faq">
+        <summary>Is it all literary fiction?</summary>
+        <p>No. There are three cohorts: Page-turners (crime, thriller, mystery), Big worlds (sci-fi, fantasy, romantasy) and Real life (narrative non-fiction, essays, memoir). The questions below will point you to one.</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- 6. Qualifier -->
+  <section id="find" class="wrap section quiz-sec" aria-labelledby="find-h">
+    <p class="eyebrow">Is this for you?</p>
+    <h2 id="find-h">Find your cohort</h2>
+    <p class="lead">Five quick questions. We'll point you to one of three cohorts.</p>
+
+    <div class="card quiz" id="quiz">
+      <div class="quiz-top" id="quiz-top">
+        <ol class="rail ctrl" id="qrail" aria-hidden="true">
+          <li class="lamp-item"><span class="lamp"></span></li>
+          <li class="lamp-item"><span class="lamp"></span></li>
+          <li class="lamp-item"><span class="lamp"></span></li>
+          <li class="lamp-item"><span class="lamp"></span></li>
+          <li class="lamp-item"><span class="lamp"></span></li>
+          <li class="lamp-item"><span class="lamp"></span></li>
+          <li class="endbar"></li>
+        </ol>
+        <p class="step" id="step" aria-live="polite">Question 1 of 5</p>
+      </div>
+
+      <form id="qform" novalidate>
+        <div id="qbody"></div>
+        <div class="actions">
+          <button type="button" class="btn btn-ghost" id="qback" hidden>Back</button>
+          <button type="submit" class="btn btn-primary" id="qnext" disabled>Next</button>
+        </div>
+      </form>
+
+      <div id="result" class="result-wrap" hidden aria-live="polite"></div>
+      <noscript><p>The cohort questions need JavaScript.</p></noscript>
+    </div>
+  </section>
+
+</main>
+
+<!-- 7. Footer -->
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="line"><span data-token="LIBRARY">[Library name]</span> Book Club. Six Wednesdays, one librarian-chosen list, then you're free.</p>
+    <p><a href="#" data-href="CONTACT_URL">Contact</a></p>
+    <ul aria-label="Sources">
+      <li><a href="https://worldbooknight.org/news/nation-of-interrupted-readers" target="_blank" rel="noopener noreferrer">The Reading Agency via World Book Night, 2025</a></li>
+      <li><a href="https://uk.style.yahoo.com/more-third-uk-adults-given-141113221.html" target="_blank" rel="noopener noreferrer">The Guardian via Yahoo, 2024</a></li>
+      <li><a href="https://www.rte.ie/culture/2026/0225/1559546-why-you-should-pick-up-a-book-for-ireland-reads-day" target="_blank" rel="noopener noreferrer">RTÉ Culture, 2026</a></li>
+      <li><a href="https://nielseniq.com/global/en/insights/commentary/2026/bestsellers-and-trends-uk-and-ireland-2025/" target="_blank" rel="noopener noreferrer">NielsenIQ UK &amp; Ireland 2025</a></li>
+      <li><a href="https://nielseniq.com/global/en/insights/commentary/2026/the-uk-book-consumer-2025" target="_blank" rel="noopener noreferrer">NielsenIQ UK Book Consumer 2025</a></li>
+      <li><a href="https://nielseniq.com/global/en/insights/commentary/2025/the-age-of-social-reading" target="_blank" rel="noopener noreferrer">NielsenIQ, The age of social reading</a></li>
+      <li><a href="https://www.mumsnet.com/talk/what_were_reading/5449834-book-club-are-you-in-one-if-so-what-does-it-cost-if-anything-and-what-do-you-likedislike-about-it" target="_blank" rel="noopener noreferrer">Mumsnet, 2025</a></li>
+      <li><a href="https://www.mumsnet.com/talk/relationships/5090613-billy-no-mates-at-the-book-group-wwyd?page=10" target="_blank" rel="noopener noreferrer">Mumsnet, 2024</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ===== Edit these five values; everything on the page reads from here. =====
+     (The static <title> and og:/twitter: tags in <head> still need editing by hand.) */
+  var CONFIG = {
+    LIBRARY: "[Library name]",
+    PRICE_TEXT: "€[price]",
+    START_DATE: "[start date]",
+    BOOKING_URL: "#",
+    CONTACT_URL: "#"
+  };
+
+  var root = document.documentElement;
+
+  function esc(s) {
+    return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  }
+
+  /* ---------- Config tokens ---------- */
+  function applyTokens() {
+    var i, els = document.querySelectorAll("[data-token]");
+    for (i = 0; i < els.length; i++) {
+      var k = els[i].getAttribute("data-token");
+      if (CONFIG[k] != null) els[i].textContent = CONFIG[k];
+    }
+    els = document.querySelectorAll("[data-href]");
+    for (i = 0; i < els.length; i++) {
+      var h = els[i].getAttribute("data-href");
+      if (CONFIG[h]) els[i].setAttribute("href", CONFIG[h]);
+    }
+    document.title = "The book club with an end date | " + CONFIG.LIBRARY;
+  }
+
+  /* ---------- Theme toggle ---------- */
+  var themeBtn = document.getElementById("theme-toggle");
+  function syncThemeLabel() {
+    themeBtn.setAttribute("aria-label", root.classList.contains("light") ? "Switch to dark mode" : "Switch to light mode");
+  }
+  themeBtn.addEventListener("click", function () {
+    var light = !root.classList.contains("light");
+    root.classList.toggle("light", light);
+    try { localStorage.setItem("theme", light ? "light" : "dark"); } catch (e) { /* ignore */ }
+    syncThemeLabel();
+  });
+
+  /* ---------- Lamp rails that light in sequence when seen ---------- */
+  function startRails() {
+    var rails = document.querySelectorAll(".rail.seq");
+    if (!("IntersectionObserver" in window)) {
+      for (var i = 0; i < rails.length; i++) rails[i].classList.add("in");
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); }
+      });
+    }, { threshold: 0.4 });
+    for (var j = 0; j < rails.length; j++) io.observe(rails[j]);
+  }
+
+  /* ---------- Qualifier data ---------- */
+  var SRC_UKIE = "https://nielseniq.com/global/en/insights/commentary/2026/bestsellers-and-trends-uk-and-ireland-2025/";
+  var SRC_UKBC = "https://nielseniq.com/global/en/insights/commentary/2026/the-uk-book-consumer-2025";
+  var SRC_SOCIAL = "https://nielseniq.com/global/en/insights/commentary/2025/the-age-of-social-reading";
+
+  function link(url, text) {
+    return '<a href="' + url + '" target="_blank" rel="noopener noreferrer">' + text + "</a>";
+  }
+
+  /* Streams: P = Page-turners, B = Big worlds, R = Real life */
+  var QUESTIONS = [
+    { text: "What do you want from a book right now?", options: [
+      { label: "To be gripped from the first chapter", pts: { P: 2, B: 1 } },
+      { label: "To be carried somewhere that isn't here", pts: { B: 2, P: 1 } },
+      { label: "To learn something true about the world", pts: { R: 2 } }
+    ] },
+    { text: "How do you read best?", options: [
+      { label: "In big gulps. I'd rather finish fast.", pts: { P: 2 } },
+      { label: "In long sinks. I like a world I can live in for weeks.", pts: { B: 2 } },
+      { label: "In pieces. A chapter or an essay, then a think.", pts: { R: 2 } }
+    ] },
+    { text: "Where do your next reads usually come from?", options: [
+      { label: "TikTok, BookTok or Goodreads", pts: { B: 2, P: 1 } },
+      { label: "Friends and family", pts: { P: 2 } },
+      { label: "Newspapers, podcasts or bestseller lists", pts: { R: 2, P: 1 } },
+      { label: "Honestly, I struggle to find anything", pts: { P: 1, B: 1, R: 1 } }
+    ] },
+    { text: "What puts you off book clubs?", options: [
+      { label: "Picks I'd never choose" },
+      { label: "Being stuck with no way out" },
+      { label: "Cliquey groups" },
+      { label: "People who haven't read the book" },
+      { label: "I've never tried one" }
+    ] },
+    { text: "Which would you pick up first?", options: [
+      { label: "A detective who knows more than they're saying", pts: { P: 2 } },
+      { label: "A kingdom at war, and a love story at its edge", pts: { B: 2 } },
+      { label: "A true account of ordinary people in an extraordinary time", pts: { R: 2 } }
+    ] }
+  ];
+
+  var OBJECTIONS = [
+    "You said picks you'd never choose put you off. Here, a librarian sets the list in advance, so nobody is asked to nominate and nobody springs a book on you.",
+    "You said being stuck puts you off. This one ends after Week 6. Staying on is your choice, not the default.",
+    "You said cliquey groups put you off. Every cohort starts together on Week 1, so there's no existing group to break into.",
+    "You said people who haven't read the book put you off. We can't make anyone read, but the list is published up front so everyone knows what's coming.",
+    "You said you've never tried one. Six weeks is enough to find out, and it ends whether you love it or not."
+  ];
+
+  var TIERS = {
+    P: {
+      slug: "page-turners", name: "Page-turners", genres: "Crime, thriller and mystery",
+      accent: "var(--amber)",
+      promise: "Six Wednesdays of books you won't want to put down.",
+      who: "You read to find out what happens, and you'd like to talk it through with people who've reached the same page.",
+      evidence: "Crime and thriller set a value record in Ireland in 2025 (" + link(SRC_UKIE, "NielsenIQ") + "), and it is the top fiction genre for UK under-45s (" + link(SRC_UKBC, "NielsenIQ") + ").",
+      cta: "Book my place in Page-turners",
+      secondary: { label: "See a Wednesday evening", href: "#sample" }
+    },
+    B: {
+      slug: "big-worlds", name: "Big worlds", genres: "Sci-fi, fantasy and romantasy",
+      accent: "var(--cyan)",
+      promise: "Six Wednesdays somewhere else entirely.",
+      who: "You'd rather live in another world for a while, and you'd like company in it.",
+      evidence: "Sci-fi and fantasy hit record value and volume sales in both the UK and Ireland in 2025 (" + link(SRC_UKIE, "NielsenIQ") + "), and 25–34s are the age group most likely to attend reading groups (" + link(SRC_SOCIAL, "NielsenIQ") + ").",
+      cta: "Book my place in Big worlds",
+      secondary: { label: "Ask about the reading list", token: "CONTACT_URL" }
+    },
+    R: {
+      slug: "real-life", name: "Real life", genres: "Narrative non-fiction, essays and memoir",
+      accent: "var(--green)",
+      promise: "Six Wednesdays of true stories and sharp thinking.",
+      who: "You like your reading to leave you knowing something new, and you like to argue it out afterwards.",
+      evidence: "Adult non-fiction was Ireland's best-performing adult sector in 2025, up 4% in value (" + link(SRC_UKIE, "NielsenIQ") + ").",
+      cta: "Book my place in Real life",
+      secondary: { label: "Tell us what you'd want to read", token: "CONTACT_URL" }
+    }
+  };
+
+  var ORDER = ["P", "B", "R"];
+
+  /* ---------- Scoring ---------- */
+  function streamOf(opt) {
+    if (!opt || !opt.pts) return null;
+    var keys = Object.keys(opt.pts), best = null;
+    keys.forEach(function (k) { if (best === null || opt.pts[k] > opt.pts[best]) best = k; });
+    return best;
+  }
+
+  function computeResult(ans) {
+    var total = { P: 0, B: 0, R: 0 }, q1 = { P: 0, B: 0, R: 0 };
+    QUESTIONS.forEach(function (q, i) {
+      var o = q.options[ans[i]];
+      if (!o || !o.pts) return;
+      Object.keys(o.pts).forEach(function (s) {
+        total[s] += o.pts[s];
+        if (i === 0) q1[s] += o.pts[s];
+      });
+    });
+    var max = Math.max(total.P, total.B, total.R);
+    var tied = ORDER.filter(function (s) { return total[s] === max; });
+    if (tied.length > 1) {
+      var q5 = streamOf(QUESTIONS[4].options[ans[4]]);
+      if (q5 && tied.indexOf(q5) !== -1) {
+        tied = [q5];
+      } else {
+        var m1 = Math.max.apply(null, tied.map(function (s) { return q1[s]; }));
+        tied = tied.filter(function (s) { return q1[s] === m1; });
+        if (tied.length > 1 && tied.indexOf("P") !== -1) tied = ["P"];
+      }
+    }
+    return { stream: tied[0], totals: total };
+  }
+
+  /* ---------- Qualifier UI ---------- */
+  var form = document.getElementById("qform");
+  var qbody = document.getElementById("qbody");
+  var nextBtn = document.getElementById("qnext");
+  var backBtn = document.getElementById("qback");
+  var stepEl = document.getElementById("step");
+  var rail = document.getElementById("qrail");
+  var resultEl = document.getElementById("result");
+  var quizEl = document.getElementById("quiz");
+  var lamps = rail.querySelectorAll(".lamp");
+
+  var idx = 0;
+  var answers = [null, null, null, null, null];
+  var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  function litCount() {
+    var n = 0;
+    answers.forEach(function (a) { if (a !== null) n++; });
+    return n;
+  }
+  function paintRail(count) {
+    for (var i = 0; i < lamps.length; i++) lamps[i].classList.toggle("on", i < count);
+  }
+
+  function renderQuestion(focusLegend) {
+    var q = QUESTIONS[idx];
+    var html = '<fieldset class="q"><legend tabindex="-1" id="qlegend">' + esc(q.text) + '</legend><div class="opts">';
+    q.options.forEach(function (o, i) {
+      var on = answers[idx] === i;
+      html += '<label class="opt' + (on ? " sel" : "") + '"><input type="radio" name="q' + idx + '" value="' + i + '"' + (on ? " checked" : "") + '><span class="opt-text">' + esc(o.label) + "</span></label>";
+    });
+    html += "</div></fieldset>";
+    qbody.innerHTML = html;
+    stepEl.textContent = "Question " + (idx + 1) + " of 5";
+    backBtn.hidden = idx === 0;
+    nextBtn.textContent = idx === QUESTIONS.length - 1 ? "See my cohort" : "Next";
+    nextBtn.disabled = answers[idx] === null;
+    paintRail(litCount());
+    if (focusLegend) document.getElementById("qlegend").focus({ preventScroll: true });
+  }
+
+  qbody.addEventListener("change", function (e) {
+    if (!e.target || e.target.type !== "radio") return;
+    answers[idx] = parseInt(e.target.value, 10);
+    var labels = qbody.querySelectorAll(".opt");
+    for (var i = 0; i < labels.length; i++) labels[i].classList.toggle("sel", labels[i].contains(e.target));
+    nextBtn.disabled = false;
+    paintRail(litCount());
+  });
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    if (answers[idx] === null) return;
+    if (idx < QUESTIONS.length - 1) { idx++; renderQuestion(true); }
+    else { showResult(); }
+  });
+
+  backBtn.addEventListener("click", function () {
+    if (idx > 0) { idx--; renderQuestion(true); }
+  });
+
+  function stream_url(slug) {
+    var base = CONFIG.BOOKING_URL;
+    return base + (base.indexOf("?") === -1 ? "?" : "&") + "stream=" + slug;
+  }
+
+  function showResult() {
+    var res = computeResult(answers);
+    var t = TIERS[res.stream];
+    var secHref = t.secondary.href || CONFIG[t.secondary.token];
+    var lampsHtml = "";
+    for (var i = 0; i < 6; i++) lampsHtml += '<li class="lamp-item"><span class="lamp on"></span></li>';
+
+    resultEl.innerHTML =
+      '<article class="result" data-stream="' + t.slug + '" style="--accent:' + t.accent + '">' +
+        '<ol class="rail" aria-hidden="true">' + lampsHtml + '<li class="endbar"></li></ol>' +
+        '<p class="eyebrow">Your cohort</p>' +
+        '<h3 id="result-h" tabindex="-1">' + esc(t.name) + "</h3>" +
+        '<p class="genres">' + esc(t.genres) + "</p>" +
+        '<p class="promise">' + esc(t.promise) + "</p>" +
+        "<p>" + esc(t.who) + "</p>" +
+        '<p class="obj">' + esc(OBJECTIONS[answers[3]]) + "</p>" +
+        '<p class="get">What you get: Six Wednesday evenings · a librarian-chosen list · a drink in the foyer · ' + esc(CONFIG.PRICE_TEXT) + "</p>" +
+        '<p class="why"><strong>Why this cohort:</strong> ' + t.evidence + "</p>" +
+        '<div class="ctas">' +
+          '<a class="btn btn-primary" href="' + esc(stream_url(t.slug)) + '">' + esc(t.cta) + "</a>" +
+          '<a class="btn btn-ghost" href="' + esc(secHref) + '">' + esc(t.secondary.label) + "</a>" +
+        "</div>" +
+        '<button type="button" class="btn btn-ghost restart" id="restart">Start again</button>' +
+      "</article>";
+
+    form.hidden = true;
+    resultEl.hidden = false;
+    document.getElementById("quiz-top").style.display = "none";
+    stepEl.textContent = "Your cohort";
+    paintRail(6);
+    document.getElementById("restart").addEventListener("click", restart);
+    document.getElementById("result-h").focus({ preventScroll: true });
+    quizEl.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+  }
+
+  function restart() {
+    answers = [null, null, null, null, null];
+    idx = 0;
+    resultEl.hidden = true;
+    resultEl.innerHTML = "";
+    form.hidden = false;
+    document.getElementById("quiz-top").style.display = "";
+    renderQuestion(true);
+    quizEl.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+  }
+
+  /* ---------- Init ---------- */
+  applyTokens();
+  syncThemeLabel();
+  startRails();
+  renderQuestion(false);
+
+  /* Exposed for testing only */
+  window.__cohort = { computeResult: computeResult, QUESTIONS: QUESTIONS };
+})();
+</script>
+</body>
+</html>
